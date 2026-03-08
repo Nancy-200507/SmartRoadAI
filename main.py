@@ -33,8 +33,7 @@ while True:
     results = model(frame)
 
     # If damage detected
-    if len(results[0].boxes) > 0:
-
+if True:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"outputs/damage_{timestamp}.jpg"
 
