@@ -11,7 +11,7 @@ model = YOLO("yolo12s_RDD2022_best.pt")
 # Create output folder
 os.makedirs("outputs", exist_ok=True)
 
-# Create CSV file to store detections
+# Create CSV file
 if not os.path.exists("detections.csv"):
     with open("detections.csv", "w", newline="") as f:
         writer = csv.writer(f)
@@ -32,14 +32,13 @@ while True:
 
     results = model(frame)
 
-    # If damage detected
-if True:
+    # Temporary test (force saving)
+    if True:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"outputs/damage_{timestamp}.jpg"
 
         cv2.imwrite(filename, frame)
 
-        # Get GPS location
         location = get_location()
 
         if location:
@@ -47,7 +46,6 @@ if True:
             print(f"Road damage saved: {filename}")
             print(f"Location: {lat}, {lon}")
 
-            # Save to CSV
             with open("detections.csv", "a", newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow([timestamp, lat, lon, filename])
